@@ -19,7 +19,7 @@
         html, body {
             background: var(--background-color);
             color: var(--text-color);
-            min-height: 100vh; /* Changed from 200vh to 100vh */
+            min-height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
             scroll-behavior: smooth;
@@ -79,6 +79,14 @@
         header p {font-size:1.4rem;color:#a0a0a0;margin-top:1rem;
             animation:fadeInUp 1s var(--ease) forwards 2.5s;
         }
+        /* Added styles for the about me paragraph */
+        header p.about-me {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+
         /* 2x2 BUTTON GRID CENTERED */
         .links-container {display:grid;grid-template-columns:repeat(2,300px);gap:2rem;
             justify-content:center;margin:4rem auto;
@@ -156,6 +164,9 @@
         <header id="main-header">
             <h1>Leon L.</h1>
             <p>Student / Tech Enjoyer</p>
+            <p class="about-me">
+                Hey, I'm Leon, a 17-year-old student from Croatia. I enjoy all things tech, especially CTFs and hacking. Below are my socials and CTF solves.
+            </p>
         </header>
         <div class="links-container">
             <div class="link-card">
