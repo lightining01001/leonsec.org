@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon's Links</title>
+    <style>
+        /* RESET & THEME VARIABLES */
+        * { margin:0; padding:0; box-sizing:border-box;
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        :root {
+            --accent-gradient: linear-gradient(90deg,#ff6b6b,#6b6bff);
+            --text-color: #e0e0e0;
+            --background-color: #121214;
+            --card-bg: rgba(25,25,30,0.85);
+            --shadow: 0 8px 30px rgba(0,0,0,0.3);
+            --ease: cubic-bezier(0.645,0.045,0.355,1);
+        }
+        html, body {
+            background: var(--background-color);
+            color: var(--text-color);
+            min-height: 200vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        /* BACKGROUND VIDEO */
+        #background-video {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; object-fit: cover;
+            z-index: -1; filter: brightness(0.6);
+            animation: videoFadeIn 2s var(--ease) both;
+        }
+        @keyframes videoFadeIn {from{opacity:0;transform:scale(1.1);}to{opacity:1;transform:scale(1);}}
+        /* WELCOME OVERLAY */
+        #welcome-overlay {
+            position: fixed; inset: 0;
+            background: rgba(10,10,15,0.95);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 1000; transition: opacity 1s var(--ease) both;
+        }
+        #welcome-text {
+            font-size: 6rem; font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            opacity: 0; transform: translateY(60px);
+            animation: fadeInUp 1.5s var(--ease) forwards 0.5s, welcomeBounce 1.5s ease-in-out infinite 2s;
+        }
+        @keyframes fadeInUp {0%{opacity:0;transform:translateY(60px);}100%{opacity:1;transform:translateY(0);}}
+        @keyframes welcomeBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        #welcome-subtext {
+            margin-top:1rem; font-size:2rem; color:#a0a0a0;
+            opacity:0; transform:translateY(60px);
+            animation: fadeInUp 1.5s var(--ease) forwards 1s;
+        }
+        #scroll-arrow {
+            margin-top:2rem; font-size:3rem; color:#888;
+            opacity:0; transform:translateY(60px);
+            animation: fadeInUp 1s var(--ease) forwards 1.5s, bounce 1.2s ease-in-out infinite 2s;
+            cursor: pointer;
+        }
+        @keyframes bounce {0%{transform:translateY(0);}100%{transform:translateY(10px);}}
+        /* MAIN CONTENT */
+        .container {position:relative;max-width:1200px;margin:auto;padding:2rem;z-index:1;
+            opacity:0;transition:opacity 1s var(--ease) both;
+        }
+        .container.visible {opacity:1;}
+        header {text-align:center;margin-bottom:3rem;
+            background:rgba(15,15,20,0.8);backdrop-filter:blur(12px);
+            border-radius:20px;box-shadow:var(--shadow);padding:3rem;
+            opacity:0;transform:translateY(60px);
+            animation:fadeUpHeader 1.2s var(--ease) forwards 2s;
+        }
+        @keyframes fadeUpHeader {to{opacity:1;transform:translateY(0);}}
+        header h1 {font-size:4rem;font-weight:900;
+            background:var(--accent-gradient);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            animation:textPulse 4s ease-in-out infinite; /* Changed to 4s from 8s */
+        }
+        @keyframes textPulse {0%,100%{opacity:1;}50%{opacity:0.75;}}
+        header p {font-size:1.4rem;color:#a0a0a0;margin-top:1rem;
+            animation:fadeInUp 1s var(--ease) forwards 2.5s;
+        }
+        /* 2x2 BUTTON GRID CENTERED */
+        .links-container {display:grid;grid-template-columns:repeat(2,300px);gap:2rem;
+            justify-content:center;margin:4rem auto;
+        }
+        .link-card {background:var(--card-bg);border-radius:24px;
+            box-shadow:var(--shadow);overflow:hidden;
+            opacity:0;transform:translateY(80px);
+            animation:fadeUpCard 1s var(--ease) forwards;
+        }
+        @keyframes fadeUpCard {to{opacity:1;transform:translateY(0);}}
+        .link-card:nth-child(1){animation-delay:2.3s;} .link-card:nth-child(2){animation-delay:2.5s;}
+        .link-card:nth-child(3){animation-delay:2.7s;} .link-card:nth-child(4){animation-delay:2.9s;}
+        .link-card:hover {transform:translateY(-15px) scale(1.1);
+            box-shadow:0 18px 80px rgba(0,0,0,0.8);
+            background:rgba(35,35,45,0.99);
+            transition:transform 0.5s var(--ease),box-shadow 0.5s var(--ease);
+        }
+        .link-button {display:flex;align-items:center;justify-content:center;
+            padding:2rem;font-size:1.3rem;font-weight:600;color:var(--text-color);
+            text-decoration:none;position:relative;overflow:hidden;
+            transition:transform 0.3s var(--ease);
+        }
+        .link-button::before {content:'';position:absolute;bottom:0;left:0;
+            width:100%;height:0;background:rgba(255,255,255,0.2);
+            transition:height 1s var(--ease);z-index:0;
+        }
+        .link-button:hover::before {height:100%;}
+        .link-button:hover {transform:scale(1.08);}
+        .link-button svg {margin-right:1rem;
+            transition:transform 0.6s var(--ease),filter 0.6s var(--ease);
+        }
+        .link-button:hover svg {transform:rotate(20deg) scale(1.3);
+            filter:drop-shadow(0 0 8px rgba(255,255,255,0.8));
+        }
+        .github {background:linear-gradient(135deg,#2b2b2b,#1a1a1a);}
+        .instagram {background:linear-gradient(45deg,#f09433,#e6683c 50%,#bc1888);}
+        .ctf {background:linear-gradient(135deg,#0071e3,#00c6fb);}
+        .email {background:linear-gradient(135deg,#4b6cb7,#182848);}
+        /* INLINE CTF SECTION */
+        #ctf-section {margin:4rem auto; max-width:900px;
+            background:var(--card-bg); padding:2rem; border-radius:20px;
+            box-shadow:var(--shadow); opacity:0; transform:translateY(80px);
+            animation:fadeUpCard 1s var(--ease) forwards 3.1s;
+        }
+        #ctf-section h2 {text-align:center; font-size:2rem;
+            background:var(--accent-gradient); -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent; margin-bottom:1rem;
+        }
+        /* Disclaimer below heading */
+        #ctf-section p.disclaimer {text-align:center; font-size:0.9rem; color:#c0c0c0;
+            margin-bottom:1.5rem; font-style:italic;
+        }
+        #ctf-table {width:100%; border-collapse:collapse;}
+        #ctf-table th, #ctf-table td {padding:0.75rem; text-align:left;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        }
+        #ctf-table th {background:rgba(30,30,40,0.9); position:sticky; top:0; color:#fff;}
+        #ctf-table tr:hover {background:rgba(40,40,55,0.6);}
+        /* FOOTER */
+        footer {text-align:center; margin-top:4rem; font-size:1rem; color:#6e6e73;
+            opacity:0; transform:translateY(20px);
+            animation:fadeUpFooter 1s var(--ease) forwards 4.2s;
+        }
+        @keyframes fadeUpFooter {to{opacity:1;transform:translateY(0);} }
+        @media(max-width:768px){header h1{font-size:3.2rem;} .links-container{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline>
+        <source src="orange-train-at-sunset.3840x2160.mp4" type="video/mp4">
+    </video>
+    <div id="welcome-overlay">
+        <div id="welcome-text">Welcome</div>
+        <div id="welcome-subtext">to Leon's Links</div>
+        <div id="scroll-arrow">&#8595;</div>
+    </div>
+    <div class="container" id="main-container">
+        <header id="main-header">
+            <h1>Leon L.</h1>
+            <p>Student / Tech Enjoyer</p>
+        </header>
+        <div class="links-container">
+            <div class="link-card">
+                <a href="#ctf-section" class="link-button ctf">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    <span>CTF Solves</span>
+                </a>
+            </div>
+            <div class="link-card">
+                <a href="https://github.com/lightining01001" target="_blank" class="link-button github">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.3-.87 2.23a4 4 0 0 1-1.13 1.27V22"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+            <div class="link-card">
+                <a href="https://instagram.com/leon.l08_" target="_blank" class="link-button instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+            </div>
+            <div class="link-card">
+                <a href="mailto:leonlezaic@protonmail.com" class="link-button email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
+                        <path d="M22 20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
+                        <path d="m22 6-10 7L2 6"/>
+                    </svg>
+                    <span>Contact Me</span>
+                </a>
+            </div>
+        </div>
+        <section id="ctf-section">
+            <h2>CTF Challenges Solved</h2>
+            <p class="disclaimer">*These are just a few of the challenges I've completed.*</p>
+            <table id="ctf-table">
+                <thead>
+                    <tr><th>Challenge</th><th>Category</th><th>Value</th><th>Time</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>dd</td><td>Razno</td><td>60</td><td>April 9th, 2:24:03 PM</td></tr>
+                    <tr><td>Zvonce202</td><td>Razno</td><td>100</td><td>April 1st, 8:52:09 AM</td></tr>
+                    <tr><td>Tajni chat</td><td>Binary exploitation</td><td>250</td><td>March 31st, 7:50:42 PM</td></tr>
+                    <tr><td>Tajni klub</td><td>Razno</td><td>70</td><td>March 30th, 4:30:10 PM</td></tr>
+                    <tr><td>Uljez</td><td>Razno</td><td>50</td><td>March 30th, 3:36:32 PM</td></tr>
+                    <tr><td>Kriptografska funkcija</td><td>Kriptografija</td><td>150</td><td>March 12th, 8:24:50 PM</td></tr>
+                    <tr><td>PHP Obfuskacija</td><td>Reverzno inženjerstvo</td><td>70</td><td>March 12th, 7:44:48 PM</td></tr>
+                    <tr><td>j4v45CR1Pt 08fu5c4t0r</td><td>Reverzno inženjerstvo</td><td>150</td><td>March 12th, 6:36:43 PM</td></tr>
+                    <tr><td>Tajne korneta</td><td>Binary exploitation</td><td>154</td><td>March 12th, 2:11:45 PM</td></tr>
+                    <tr><td>MrRobot</td><td>Binary exploitation</td><td>150</td><td>March 12th, 1:57:26 PM</td></tr>
+                    <tr><td>Prefiks</td><td>Binary exploitation</td><td>200</td><td>March 12th, 1:50:00 PM</td></tr>
+                    <tr><td>Jednadžba prijevoza</td><td>Binary exploitation</td><td>100</td><td>February 6th, 3:53:25 PM</td></tr>
+                    <tr><td>Binary nemoguća misija</td><td>Binary exploitation</td><td>70</td><td>February 6th, 3:32:47 PM</td></tr>
+                    <tr><td>Izbrisana datoteka</td><td>Forenzika</td><td>50</td><td>February 6th, 12:57:39 PM</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <footer>© 2025 Leon L. All rights reserved.</footer>
+    </div>
+    <script>
+        // Hide welcome & show main
+        const welcome = document.getElementById('welcome-overlay'),
+              main = document.getElementById('main-container');
+        function hideWelcome() {
+            welcome.style.opacity = '0';
+            setTimeout(() => { welcome.style.display = 'none'; main.classList.add('visible'); }, 1000);
+            ['scroll','wheel','touchstart'].forEach(evt => window.removeEventListener(evt, hideWelcome));
+        }
+        ['scroll','wheel','touchstart'].forEach(evt => window.addEventListener(evt, hideWelcome));
+        document.getElementById('scroll-arrow').addEventListener('click', () => {
+            hideWelcome(); main.scrollIntoView({ behavior: 'smooth' });
+        });
+        // Smooth scroll for CTF button
+        document.querySelector('.ctf').addEventListener('click', e => {
+            e.preventDefault(); document.getElementById('ctf-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        // External link confirmation
+        document.querySelectorAll('.link-button[target="_blank"]').forEach(link =>
+            link.addEventListener('click', e => { e.preventDefault(); const url = link.href;
+                if (confirm(`Redirect to ${url}?`)) window.open(url, '_blank');
+            })
+        );
+    </script>
+</body>
+</html>
