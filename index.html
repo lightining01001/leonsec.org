@@ -19,19 +19,13 @@
         html, body {
             background: var(--background-color);
             color: var(--text-color);
-            min-height: 200vh;
+            min-height: 100vh; /* Changed from 200vh to 100vh */
             overflow-x: hidden;
             overflow-y: auto;
             scroll-behavior: smooth;
         }
         /* BACKGROUND VIDEO */
-        #background-video {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; object-fit: cover;
-            z-index: -1; filter: brightness(0.6);
-            animation: videoFadeIn 2s var(--ease) both;
-        }
-        @keyframes videoFadeIn {from{opacity:0;transform:scale(1.1);}to{opacity:1;transform:scale(1);}}
+        /* Removed #background-video styles */
         /* WELCOME OVERLAY */
         #welcome-overlay {
             position: fixed; inset: 0;
@@ -79,7 +73,7 @@
         header h1 {font-size:4rem;font-weight:900;
             background:var(--accent-gradient);
             -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            animation:textPulse 4s ease-in-out infinite; /* Changed to 4s from 8s */
+            animation:textPulse 4s ease-in-out infinite;
         }
         @keyframes textPulse {0%,100%{opacity:1;}50%{opacity:0.75;}}
         header p {font-size:1.4rem;color:#a0a0a0;margin-top:1rem;
@@ -153,9 +147,6 @@
     </style>
 </head>
 <body>
-    <video id="background-video" autoplay muted loop playsinline>
-        <source src="orange-train-at-sunset.3840x2160.mp4" type="video/mp4">
-    </video>
     <div id="welcome-overlay">
         <div id="welcome-text">Welcome</div>
         <div id="welcome-subtext">to Leon's Links</div>
