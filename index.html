@@ -10,12 +10,14 @@
         :root {
             --accent-gradient: linear-gradient(90deg,#ff6b6b,#6b6bff);
             --ctf-gradient: linear-gradient(135deg,#00ff88,#00ccff);
+            --petition-gradient: linear-gradient(135deg,#ff4444,#cc1111);
             --text-color: #e0e0e0;
             --background-color: #0a0a0c;
             --card-bg: rgba(25,25,30,0.85);
             --shadow: 0 8px 30px rgba(0,0,0,0.4);
             --glow: 0 0 20px rgba(107,107,255,0.5);
             --ctf-glow: 0 0 20px rgba(0,255,136,0.5);
+            --petition-glow: 0 0 20px rgba(255,68,68,0.5);
             --ease: cubic-bezier(0.23, 1, 0.32, 1);
             --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
@@ -117,7 +119,7 @@
             opacity: 0;
             animation: fadeInUp 1s var(--ease) forwards 1.3s;
         }
-        .blog-button, .game-button {
+        .blog-button, .game-button, .petition-button {
             display: flex; align-items: center; justify-content: center;
             padding: 0.6rem 1.2rem;
             border-radius: 12px;
@@ -132,26 +134,33 @@
             backdrop-filter: blur(10px);
             background: var(--accent-gradient);
         }
-        .blog-button::before, .game-button::before {
+        .petition-button {
+            background: var(--petition-gradient);
+        }
+        .blog-button::before, .game-button::before, .petition-button::before {
             content: ''; position: absolute; bottom: 0; left: 0;
             width: 100%; height: 0;
             background: linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
             transition: height 0.5s var(--ease); z-index: 0;
             pointer-events: none;
         }
-        .blog-button:hover::before, .game-button:hover::before { 
+        .blog-button:hover::before, .game-button:hover::before, .petition-button:hover::before { 
             height: 100%; 
         }
         .blog-button:hover, .game-button:hover {
             transform: scale(1.12) translateY(-3px);
             box-shadow: var(--glow);
         }
-        .blog-button svg, .game-button svg {
+        .petition-button:hover {
+            transform: scale(1.12) translateY(-3px);
+            box-shadow: var(--petition-glow);
+        }
+        .blog-button svg, .game-button svg, .petition-button svg {
             margin-right: 0.5rem;
             transition: transform 0.6s var(--bounce), filter 0.6s var(--ease);
             width: 16px; height: 16px;
         }
-        .blog-button:hover svg, .game-button:hover svg {
+        .blog-button:hover svg, .game-button:hover svg, .petition-button:hover svg {
             transform: rotate(360deg) scale(1.3);
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
         }
@@ -306,7 +315,7 @@
             #modal-content p {font-size:1rem;}
             #scroll-top-btn {width: 40px; height: 40px; font-size: 1.2rem;}
             .button-container {flex-direction: column; gap: 0.8rem; align-items: center;}
-            .blog-button, .game-button {
+            .blog-button, .game-button, .petition-button {
                 width: 200px;
             }
         }
@@ -340,6 +349,14 @@
                         <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14 2 14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3s-.5-4.496-.664-5.223c-.008-.05-.012-.1-.018-.151A4 4 0 0 0 17.32 5z"/>
                     </svg>
                     <span>Visit My Retro Game Site</span>
+                </a>
+                <a href="https://www.stopkillinggames.com/" target="_blank" class="petition-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-alert">
+                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                        <path d="M12 8v4"/>
+                        <path d="M12 16h.01"/>
+                    </svg>
+                    <span>Stop Killing Games</span>
                 </a>
             </div>
         </header>
@@ -378,4 +395,114 @@
                 </a>
             </div>
         </div>
-        <footer class="parallax">© 2025 Leon L.
+        <footer class="parallax">© 2025 Leon L.</footer>
+    </div>
+
+    <div id="modal-overlay">
+        <div id="modal-content">
+            <p>Open external link?</p>
+            <p><a href="#" id="modal-link"></a></p>
+            <div id="modal-buttons">
+                <button id="modal-cancel">Cancel</button>
+                <button id="modal-confirm">Open</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="scroll-top-btn">↑</div>
+
+    <script>
+        // Snowfall animation
+        function createSnowflakes() {
+            const snowfallBg = document.getElementById('snowfall-bg');
+            const numFlakes = 50;
+            
+            for (let i = 0; i < numFlakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snowflake.style.animationDelay = Math.random() * 2 + 's';
+                snowfallBg.appendChild(snowflake);
+            }
+        }
+
+        // Parallax effect
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        }
+
+        // Scroll to top button
+        function handleScrollButton() {
+            const scrollBtn = document.getElementById('scroll-top-btn');
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        }
+
+        // Modal functionality
+        function setupModal() {
+            const modal = document.getElementById('modal-overlay');
+            const modalLink = document.getElementById('modal-link');
+            const cancelBtn = document.getElementById('modal-cancel');
+            const confirmBtn = document.getElementById('modal-confirm');
+            let targetUrl = '';
+
+            // Handle external links
+            document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    targetUrl = link.href;
+                    modalLink.textContent = targetUrl;
+                    modalLink.href = targetUrl;
+                    modal.classList.add('visible');
+                });
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                modal.classList.remove('visible');
+            });
+
+            confirmBtn.addEventListener('click', () => {
+                window.open(targetUrl, '_blank');
+                modal.classList.remove('visible');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('visible');
+                }
+            });
+        }
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top-btn').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            handleParallax();
+            handleScrollButton();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes();
+            setupModal();
+        });
+    </script>
+</body>
+</html>
