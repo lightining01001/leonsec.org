@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leon's Links</title>
+
+    <!-- Meta Tags for SEO and Social Media -->
+    <meta name="description" content="Hey, I'm Leon, a 17-year-old student from Croatia. I enjoy all things tech, especially CTFs and hacking. Check out my socials!">
+    <meta name="keywords" content="Leon, Croatia, Student, Tech, CTF, Hacking, Cybersecurity, Portfolio, Links">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://leonsec.org/">
+    <meta property="og:title" content="Leon's Links - Student & Tech Enthusiast">
+    <meta property="og:description" content="Hey, I'm Leon, a 17-year-old student from Croatia. I enjoy all things tech, especially CTFs and hacking. Check out my socials!">
+    <meta property="og:image" content="https://leonsec.org/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://leonsec.org/">
+    <meta property="twitter:title" content="Leon's Links - Student & Tech Enthusiast">
+    <meta property="twitter:description" content="Hey, I'm Leon, a 17-year-old student from Croatia. I enjoy all things tech, especially CTFs and hacking. Check out my socials!">
+    <meta property="twitter:image" content="https://leonsec.org/preview.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
     <style>
         * { margin:0; padding:0; box-sizing:border-box;
             font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
@@ -52,7 +75,7 @@
         }
         .container {
             position:relative; max-width:1200px; margin:auto; padding:2rem; z-index:1;
-            opacity:0; 
+            opacity:0;
             animation: containerFadeIn 1.2s var(--ease) forwards 0.3s;
         }
         @keyframes containerFadeIn {
@@ -144,9 +167,9 @@
             transition: height 0.5s var(--ease); z-index: 0;
             pointer-events: none;
         }
-        .blog-button:hover::before, .game-button:hover::before, .petition-button:hover::before { 
-            height: 100%; 
-        }
+        .blog-button:hover::before, .game-button:hover::before, .petition-button:hover::before {
+             height: 100%;
+         }
         .blog-button:hover, .game-button:hover {
             transform: scale(1.12) translateY(-3px);
             box-shadow: var(--glow);
@@ -173,7 +196,7 @@
             box-shadow:var(--shadow); overflow:hidden;
             opacity:0; transform:translateY(80px) rotateY(15deg);
             animation:fadeUpCard 1s var(--bounce) forwards;
-            position: relative; 
+            position: relative;
             transition: all 0.5s var(--ease);
             perspective: 1000px;
         }
@@ -336,7 +359,7 @@
                 <a href="/blog.html" class="blog-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-square">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        <path d="M18.5 2.5a2.121 2 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                     </svg>
                     <span>Visit My Blog</span>
                 </a>
@@ -397,7 +420,6 @@
         </div>
         <footer class="parallax">© 2025 Leon L.</footer>
     </div>
-
     <div id="modal-overlay">
         <div id="modal-content">
             <p>Open external link?</p>
@@ -408,15 +430,13 @@
             </div>
         </div>
     </div>
-
     <div id="scroll-top-btn">↑</div>
-
     <script>
         // Snowfall animation
         function createSnowflakes() {
             const snowfallBg = document.getElementById('snowfall-bg');
             const numFlakes = 50;
-            
+
             for (let i = 0; i < numFlakes; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
@@ -426,19 +446,17 @@
                 snowfallBg.appendChild(snowflake);
             }
         }
-
         // Parallax effect
         function handleParallax() {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.parallax');
-            
+
             parallaxElements.forEach((element, index) => {
                 const speed = 0.5 + (index * 0.1);
                 const yPos = -(scrolled * speed);
                 element.style.transform = `translateY(${yPos}px)`;
             });
         }
-
         // Scroll to top button
         function handleScrollButton() {
             const scrollBtn = document.getElementById('scroll-top-btn');
@@ -448,7 +466,6 @@
                 scrollBtn.classList.remove('visible');
             }
         }
-
         // Modal functionality
         function setupModal() {
             const modal = document.getElementById('modal-overlay');
@@ -483,7 +500,6 @@
                 }
             });
         }
-
         // Scroll to top functionality
         document.getElementById('scroll-top-btn').addEventListener('click', () => {
             window.scrollTo({
@@ -491,18 +507,17 @@
                 behavior: 'smooth'
             });
         });
-
         // Event listeners
         window.addEventListener('scroll', () => {
             handleParallax();
             handleScrollButton();
         });
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createSnowflakes();
             setupModal();
         });
     </script>
+    <script src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" xintegrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95917c084af524c2","version":"2025.6.2","r":1,"token":"f55ae54f5da446a58a02a10ddb523f45","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 </html>
