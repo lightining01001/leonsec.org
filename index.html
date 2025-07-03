@@ -169,7 +169,7 @@
         }
         .blog-button:hover::before, .game-button:hover::before, .petition-button:hover::before {
              height: 100%;
-         }
+           }
         .blog-button:hover, .game-button:hover {
             transform: scale(1.12) translateY(-3px);
             box-shadow: var(--glow);
@@ -403,7 +403,8 @@
                 </a>
             </div>
             <div class="link-card parallax">
-                <a href="/cdn-cgi/l/email-protection#76e5f4e4fff4e5e2eee6e3e376e5f4e4fff4e5e2eee6e3e358f9f5f7" class="link-button email">
+                <!-- MODIFIED: Added an id and removed the Cloudflare obfuscated href -->
+                <a href="#" id="email-button" class="link-button email">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail">
                         <path d="M22 20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
                         <path d="m22 6-10 7L2 6"/>
@@ -500,6 +501,20 @@
                 }
             });
         }
+
+        // --- UPDATED JAVASCRIPT FOR EMAIL BUTTON ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailButton = document.getElementById('email-button');
+            if (emailButton) {
+                emailButton.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent the default link behavior
+                    const userEmail = 'contact@mail.leonsec.org'; // Corrected email address
+                    window.location.href = `mailto:${userEmail}`;
+                });
+            }
+        });
+        // --- END UPDATED JAVASCRIPT ---
+
         // Scroll to top functionality
         document.getElementById('scroll-top-btn').addEventListener('click', () => {
             window.scrollTo({
@@ -518,6 +533,7 @@
             setupModal();
         });
     </script>
+    <!-- Cloudflare beacon script (kept as is, but not used for email link anymore) -->
     <script src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" xintegrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95917c084af524c2","version":"2025.6.2","r":1,"token":"f55ae54f5da446a58a02a10ddb523f45","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 </html>
