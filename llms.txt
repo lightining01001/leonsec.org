@@ -1,0 +1,20 @@
+# Leon's Links
+
+Hey, I'm Leon, a 17-year-old student from Croatia. I enjoy all things tech, especially CTFs and hacking. Check out my socials!
+
+## Social Media Links
+
+- [GitHub](https://github.com/lightining01001): A platform where I share my coding projects and contributions to open-source software.
+- [Instagram](https://instagram.com/leon.l08_): Follow my journey in tech and hacking through my personal updates and posts.
+
+## Contact Information
+
+- [Contact Me](https://www.leonsec.org/#): Reach out for inquiries, collaborations, or just to connect!
+
+## CTF Team
+
+- [CTF Team | Kiberpsihoza.exe](https://kiberpsihoza.xyz/): Join my Capture The Flag (CTF) team, where we tackle challenges and improve our hacking skills together.
+
+## Personal Website
+
+- [leonsec.org](https://leonsec.org/): Visit my personal website for more information about my projects, interests, and updates in the tech world.
